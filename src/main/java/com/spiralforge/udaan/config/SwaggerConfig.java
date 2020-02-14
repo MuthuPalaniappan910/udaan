@@ -15,7 +15,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.spiralforge.cureme")).paths(PathSelectors.any()).build();
+				.apis(RequestHandlerSelectors.basePackage("com.spiralforge.udaan")).paths(PathSelectors.any()).build();
 
 	}
 }
