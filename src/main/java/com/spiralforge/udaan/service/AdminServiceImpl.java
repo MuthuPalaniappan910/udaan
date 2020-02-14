@@ -10,13 +10,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spiralforge.udaan.config.exception.AdminNotFoundException;
 import com.spiralforge.udaan.constants.ApiConstant;
 import com.spiralforge.udaan.dto.LoginRequestDto;
 import com.spiralforge.udaan.dto.LoginResponseDto;
 import com.spiralforge.udaan.dto.SchemeList;
 import com.spiralforge.udaan.entity.Admin;
 import com.spiralforge.udaan.entity.Donation;
+import com.spiralforge.udaan.exception.AdminNotFoundException;
 import com.spiralforge.udaan.repository.AdminRepository;
 import com.spiralforge.udaan.repository.DonationRepository;
 import com.spiralforge.udaan.repository.SchemeRepository;

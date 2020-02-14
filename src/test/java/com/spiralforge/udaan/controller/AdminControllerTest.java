@@ -12,9 +12,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.spiralforge.udaan.config.exception.AdminNotFoundException;
 import com.spiralforge.udaan.dto.LoginRequestDto;
 import com.spiralforge.udaan.dto.LoginResponseDto;
+import com.spiralforge.udaan.exception.AdminNotFoundException;
 import com.spiralforge.udaan.service.AdminService;
 
 @RunWith(MockitoJUnitRunner.Silent.class)

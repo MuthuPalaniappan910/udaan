@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spiralforge.udaan.config.exception.AdminNotFoundException;
 import com.spiralforge.udaan.constants.ApiConstant;
 import com.spiralforge.udaan.dto.LoginRequestDto;
 import com.spiralforge.udaan.dto.LoginResponseDto;
 import com.spiralforge.udaan.dto.SchemeList;
 import com.spiralforge.udaan.dto.StatisticsResponseDto;
+import com.spiralforge.udaan.exception.AdminNotFoundException;
 import com.spiralforge.udaan.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;

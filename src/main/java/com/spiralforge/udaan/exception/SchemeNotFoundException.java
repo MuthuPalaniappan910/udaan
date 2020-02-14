@@ -1,4 +1,4 @@
-package com.spiralforge.udaan.config.exception;
+package com.spiralforge.udaan.exception;
 
 public class SchemeNotFoundException extends Exception {
 

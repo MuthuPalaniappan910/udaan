@@ -1,4 +1,4 @@
-package com.spiralforge.udaan.config.exception;
+package com.spiralforge.udaan.exception;
 
 import java.util.Date;
 import java.util.LinkedHashMap;

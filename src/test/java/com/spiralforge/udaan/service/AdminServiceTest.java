@@ -10,10 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.spiralforge.udaan.config.exception.AdminNotFoundException;
 import com.spiralforge.udaan.dto.LoginRequestDto;
 import com.spiralforge.udaan.dto.LoginResponseDto;
 import com.spiralforge.udaan.entity.Admin;
+import com.spiralforge.udaan.exception.AdminNotFoundException;
 import com.spiralforge.udaan.repository.AdminRepository;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
