@@ -75,7 +75,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "{userId}/download", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> downloadPDF(@PathVariable("userId") Long userId)
-			throws UserNotFoundException, DonationNotFoundException, IOException {
+			throws UserNotFoundException, DonationNotFoundException {
 
 		byte[] byteData = userService.download(userId);
 
@@ -104,7 +104,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "{userId}/email", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> sendPDFInMail(@PathVariable("userId") Long userId)
-			throws UserNotFoundException, DonationNotFoundException, IOException {
+			throws UserNotFoundException, DonationNotFoundException {
 
 		byte[] byteData = userService.sendPDFInMail(userId);
 

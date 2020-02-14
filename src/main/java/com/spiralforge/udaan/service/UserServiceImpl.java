@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	 * @param paymentRequestDto has username,pan number,emailId and mobile number.
 	 * @return success message is sent to user.
 	 * @throws SchemeNotFoundException if no scheme found.
-	 * @throws UserNotFoundException 
+	 * @throws UserNotFoundException if user not found
 	 */
 	@Transactional
 	public PaymentResponseDto charitablePayment(@Valid PaymentRequestDto paymentRequestDto)

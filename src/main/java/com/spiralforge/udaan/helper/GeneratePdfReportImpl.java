@@ -57,7 +57,6 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
 
-
 			if (!Objects.isNull(user)) {
 
 				PdfPCell cell;
@@ -73,7 +72,11 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(String.valueOf(Utility.calculateCharges(donation.getScheme().getSchemeAmount(), donation.getScheme().getTaxBenefit()).toString()+" [ in"+donation.getScheme().getTaxBenefit()+" %]")));
+				cell = new PdfPCell(
+						new Phrase(String.valueOf(Utility
+								.calculateCharges(donation.getScheme().getSchemeAmount(),
+										donation.getScheme().getTaxBenefit())
+								.toString() + " [ in" + donation.getScheme().getTaxBenefit() + " %]")));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingRight(5);
@@ -84,18 +87,20 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 			PdfWriter.getInstance(document, out);
 			document.open();
 			String description0 = "Dear User,";
-			if(!Objects.isNull(user))
-				description0 = "Dear "+user.getUserName()+",";
-			
-			document.add(new Paragraph(description0));
-			String description = "Thank You for your donation.";
-			document.add(new Paragraph(description));
-			String description1 = "EMAIL ID: "+user.getEmailId();
-			document.add(new Paragraph(description1));
-			String description2 = "PAN NUMBER: "+user.getPanNumber();
-			document.add(new Paragraph(description2));
-			String description3 = "MOBILE NUMBER: "+user.getMobileNumber();
-			document.add(new Paragraph(description3));
+			if (!Objects.isNull(user)) {
+				description0 = "Dear " + user.getUserName() + ",";
+
+				document.add(new Paragraph(description0));
+				String description = "Thank You for your donation.";
+				document.add(new Paragraph(description));
+				String description1 = "EMAIL ID: " + user.getEmailId();
+				document.add(new Paragraph(description1));
+				String description2 = "PAN NUMBER: " + user.getPanNumber();
+				document.add(new Paragraph(description2));
+				String description3 = "MOBILE NUMBER: " + user.getMobileNumber();
+				document.add(new Paragraph(description3));
+
+			}
 			String description7 = "";
 			document.add(new Paragraph(description7));
 			document.add(table);
