@@ -16,3 +16,4 @@ create table user (user_id bigint not null auto_increment, email_id varchar(255)
 
 alter table donation add constraint FK8ohjtufma9ixlbckv02wj4hrx foreign key (scheme_id) references scheme (scheme_id);
 alter table donation add constraint FK2rx4oikd7rs8ddja8k9xc25my foreign key (user_id) references user (user_id);
+

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.spiralforge.udaan.config.util.UdaanEnum.Role;
+import com.spiralforge.udaan.util.UdaanEnum.Role;
 
 import lombok.Data;
 
