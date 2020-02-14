@@ -22,6 +22,7 @@ import com.spiralforge.udaan.entity.User;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
 import com.spiralforge.udaan.repository.SchemeRepository;
 import com.spiralforge.udaan.repository.UserRepository;
+import com.spiralforge.udaan.util.Utility;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class UserServiceTest {
@@ -39,12 +40,19 @@ public class UserServiceTest {
 	PaymentRequestDto paymentRequestDto = new PaymentRequestDto();
 	Scheme scheme = new Scheme();
 	User user = new User();
+	Double amount = 20D;
 	
 	@Before
 	public void setUp() {
 		scheme.setSchemeId(1L);
+		scheme.setSchemeAmount(1000D);
+		scheme.setTaxBenefit(2f);
 		paymentRequestDto.setSchemeId(1L);
 		BeanUtils.copyProperties(paymentRequestDto, user);
+		BeanUtils.copyProperties(paymentRequestDto, paymentResponseDto);
+		BeanUtils.copyProperties(scheme, paymentResponseDto);
+		paymentResponseDto.setTaxBenefit(amount);
+		paymentResponseDto.setUserId(user.getUserId());
 		user.setUserStatus(ApplicationConstants.ACTIVE_STATUS);
 		paymentResponseDto.setMessage(ApiConstant.PAYMENT_SUCCESS);
 		paymentResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);

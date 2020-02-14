@@ -19,6 +19,7 @@ import com.spiralforge.udaan.entity.User;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
 import com.spiralforge.udaan.repository.SchemeRepository;
 import com.spiralforge.udaan.repository.UserRepository;
+import com.spiralforge.udaan.util.Utility;
 
 /**
  * @author Sri Keerthna.
@@ -59,6 +60,11 @@ public class UserServiceImpl implements UserService {
 		BeanUtils.copyProperties(paymentRequestDto, user);
 		user.setUserStatus(ApplicationConstants.ACTIVE_STATUS);
 		userRepository.save(user);
+		BeanUtils.copyProperties(paymentRequestDto, paymentResponseDto);
+		BeanUtils.copyProperties(scheme.get(), paymentResponseDto);
+		paymentResponseDto.setUserId(user.getUserId());
+		Double taxBenefitAmount=Utility.calculateCharges(scheme.get().getSchemeAmount(), scheme.get().getTaxBenefit());
+		paymentResponseDto.setTaxBenefit(taxBenefitAmount);
 		paymentResponseDto.setMessage(ApiConstant.PAYMENT_SUCCESS);
 		paymentResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);
 		logger.info("Payment Success");

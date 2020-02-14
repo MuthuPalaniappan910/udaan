@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/admin")
-@CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
+@CrossOrigin(allowedHeaders = { "10.117.189.28", "*/" }, origins = { "*", "*/" })
 public class AdminController {
 	@Autowired
 	AdminService adminService;

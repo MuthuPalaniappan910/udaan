@@ -13,4 +13,13 @@ public class PaymentResponseDto {
 
 	private String message;
 	private Integer statusCode;
+	private String userName;
+	private String emailId;
+	private Long mobileNumber;
+	private String panNumber;
+	private String creditCardNumber;
+	private String schemeName;
+	private Double schemeAmount;
+	private Double taxBenefit;
+	private Long userId;
 }

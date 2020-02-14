@@ -7,8 +7,7 @@ package com.spiralforge.udaan.constants;
  */
 public class ApiConstant {
 
-	private ApiConstant() {
-	}
+	private ApiConstant() {	}
 
 	public static final String ADMIN_NOTFOUND_MESSAGE = "Invalid credentials. Please enter valid username and password";
 	public static final String LOGIN_SUCCESS = "You are successfully logged in";

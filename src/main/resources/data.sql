@@ -18,6 +18,6 @@ alter table donation add constraint FK8ohjtufma9ixlbckv02wj4hrx foreign key (sch
 alter table donation add constraint FK2rx4oikd7rs8ddja8k9xc25my foreign key (user_id) references user (user_id);
 
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('1', 'A man who lives everywhere lives nowhere.', '1000', 'Homeless Children', 'ACTIVE', '5');
-INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('2', 'One in four kids in the India faces hunger.', '5000', 'Hunger Solution', 'ACTIVE', '8');
+INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('2', 'One in four kids in India faces hunger.', '5000', 'Hunger Solution', 'ACTIVE', '8');
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('3', 'Help the rural people to get an education', '5000', 'Rural voices ', 'ACTIVE', '10');
 
