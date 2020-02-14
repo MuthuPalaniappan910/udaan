@@ -76,8 +76,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.9</version>
-		</dependency>
+			</dependency>
 		
 		<dependency>
 			<groupId>com.lowagie</groupId>
@@ -125,8 +124,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M4</version>
-			</plugin>
+				</plugin>
 		</plugins>
 	</build>
 </project>
