@@ -53,13 +53,10 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
 
-			hcell = new PdfPCell(new Phrase("Tax Benefit (in %) ", headFont));
+			hcell = new PdfPCell(new Phrase("Tax Benefit Amount ", headFont));
 			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(hcell);
 
-			hcell = new PdfPCell(new Phrase("Tax Benefit Amount", headFont));
-			hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table.addCell(hcell);
 
 			if (!Objects.isNull(user)) {
 
@@ -76,24 +73,20 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(String.valueOf(donation.getScheme().getTaxBenefit().toString())));
-				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-				table.addCell(cell);
-
-				cell = new PdfPCell(new Phrase(String.valueOf(Utility
-						.calculateCharges(donation.getScheme().getSchemeAmount(), donation.getScheme().getTaxBenefit())
-						.toString())));
+				cell = new PdfPCell(new Phrase(String.valueOf(Utility.calculateCharges(donation.getScheme().getSchemeAmount(), donation.getScheme().getTaxBenefit()).toString()+" [ in"+donation.getScheme().getTaxBenefit()+" %]")));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingRight(5);
+
 				table.addCell(cell);
 			}
 
 			PdfWriter.getInstance(document, out);
 			document.open();
+			String description0 = "Dear User,";
+			if(!Objects.isNull(user))
+				description0 = "Dear "+user.getUserName()+",";
 			
-			String description0 = "Dear "+user.getUserName()+",";
 			document.add(new Paragraph(description0));
 			String description = "Thank You for your donation.";
 			document.add(new Paragraph(description));
@@ -103,8 +96,11 @@ public class GeneratePdfReportImpl implements GeneratePdfReport {
 			document.add(new Paragraph(description2));
 			String description3 = "MOBILE NUMBER: "+user.getMobileNumber();
 			document.add(new Paragraph(description3));
-			
+			String description7 = "";
+			document.add(new Paragraph(description7));
 			document.add(table);
+			String description8 = "";
+			document.add(new Paragraph(description8));
 			String description4 = "";
 			document.add(new Paragraph(description4));
 			String description5 = "Sincerely,";

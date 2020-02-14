@@ -79,7 +79,7 @@ public class UserController {
 
 		byte[] byteData = userService.download(userId);
 
-		if (Objects.isNull(byteData) || byteData.length > 0) {
+		if (Objects.isNull(byteData) || byteData.length < 1) {
 			return ResponseEntity.badRequest().build();
 		} else {
 			logger.info("inside download pdf method");
@@ -108,7 +108,7 @@ public class UserController {
 
 		byte[] byteData = userService.sendPDFInMail(userId);
 
-		if (Objects.isNull(byteData) || byteData.length > 0) {
+		if (Objects.isNull(byteData) || byteData.length < 1) {
 			return ResponseEntity.badRequest().build();
 		} else {
 			logger.info("inside download pdf and send PDF in Mail");

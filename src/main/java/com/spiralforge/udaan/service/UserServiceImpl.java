@@ -128,6 +128,8 @@ public class UserServiceImpl implements UserService {
 				throw new DonationNotFoundException(ApiConstant.DONATION_NOTFOUND_MESSAGE);
 
 			} else {
+				logger.info("inside generate pdf:::::");
+
 				return generatePdfReport.generatePdf(user.get(), donation);
 			}
 		}
