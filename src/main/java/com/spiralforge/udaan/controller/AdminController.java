@@ -20,6 +20,7 @@ import com.spiralforge.udaan.dto.LoginResponseDto;
 import com.spiralforge.udaan.dto.SchemeList;
 import com.spiralforge.udaan.dto.StatisticsResponseDto;
 import com.spiralforge.udaan.exception.AdminNotFoundException;
+import com.spiralforge.udaan.exception.SchemeListEmptyException;
 import com.spiralforge.udaan.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,14 +56,26 @@ public class AdminController {
 		return new ResponseEntity<>(loginResponse, HttpStatus.OK);
 	}
 
+	/**
+	 * @author Muthu
+	 * 
+	 *         Method is used for getting the count which is used for giving a
+	 *         pictorial view for admin
+	 * 
+	 * @return StatisticsResponseDto which includes the scheme name and the number
+	 *         of donors for each scheme
+	 * @throws SchemeListEmptyException
+	 */
 	@GetMapping
-	public ResponseEntity<StatisticsResponseDto> getStatisticsDetails() {
+	public ResponseEntity<StatisticsResponseDto> getStatisticsDetails() throws SchemeListEmptyException {
 		List<SchemeList> schemeList = adminService.getStatisticsDetails();
 		StatisticsResponseDto statisticsResponseDto = new StatisticsResponseDto();
 		if (schemeList.isEmpty()) {
+			log.info(ApiConstant.SCHEMELIST_EMPTY_MESSAGE);
 			statisticsResponseDto.setMessage(ApiConstant.SCHEMELIST_EMPTY_MESSAGE);
 			return new ResponseEntity<>(statisticsResponseDto, HttpStatus.NOT_FOUND);
 		}
+		log.info(ApiConstant.SCHEMELIST_MESSAGE);
 		statisticsResponseDto.setSchemeList(schemeList);
 		statisticsResponseDto.setMessage(ApiConstant.SCHEMELIST_MESSAGE);
 		return new ResponseEntity<>(statisticsResponseDto, HttpStatus.OK);

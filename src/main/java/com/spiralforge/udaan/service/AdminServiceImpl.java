@@ -2,7 +2,9 @@ package com.spiralforge.udaan.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,7 +18,9 @@ import com.spiralforge.udaan.dto.LoginResponseDto;
 import com.spiralforge.udaan.dto.SchemeList;
 import com.spiralforge.udaan.entity.Admin;
 import com.spiralforge.udaan.entity.Donation;
+import com.spiralforge.udaan.entity.Scheme;
 import com.spiralforge.udaan.exception.AdminNotFoundException;
+import com.spiralforge.udaan.exception.SchemeListEmptyException;
 import com.spiralforge.udaan.repository.AdminRepository;
 import com.spiralforge.udaan.repository.DonationRepository;
 import com.spiralforge.udaan.repository.SchemeRepository;
@@ -61,11 +65,34 @@ public class AdminServiceImpl implements AdminService {
 		log.info("Admin details are being set as a response");
 		return loginResponseDto;
 	}
-
+	/**
+	 * @author Muthu
+	 * 
+	 *         Method is used for getting the count which is used for giving a
+	 *         pictorial view for admin
+	 * 
+	 * @return StatisticsResponseDto which includes the scheme name and the number
+	 *         of donors for each scheme
+	 * @throws SchemeListEmptyException
+	 */
 	@Override
-	public List<SchemeList> getStatisticsDetails() {
+	public List<SchemeList> getStatisticsDetails() throws SchemeListEmptyException {
 		List<SchemeList> schemeList = new ArrayList<>();
 		List<Donation> scheme = donationRepository.findAll();
+		if (scheme.isEmpty()) {
+			log.error(ApiConstant.SCHEMELIST_EMPTY_MESSAGE);
+			throw new SchemeListEmptyException(ApiConstant.SCHEMELIST_EMPTY_MESSAGE);
+		}
+		Map<Scheme, Integer> schemeDetails = scheme.stream()
+				.collect(Collectors.groupingBy(Donation::getScheme, Collectors
+						.collectingAndThen(Collectors.mapping(Donation::getScheme, Collectors.toList()), List::size)));
+		schemeDetails.forEach((schemeName, count) -> {
+			SchemeList schemeDetail = new SchemeList();
+			schemeDetail.setSchemeName(schemeName.getSchemeName());
+			schemeDetail.setCount(count);
+			schemeList.add(schemeDetail);
+		});
+		log.info("Return's the count for each scheme");
 		return schemeList;
 	}
 }

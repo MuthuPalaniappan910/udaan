@@ -52,8 +52,7 @@ public class SchemeServiceImpl implements SchemeService {
 			log.error(ApiConstant.SCHEME_NOTFOUND_MESSAGE);
 			throw new SchemeNotFoundException(ApiConstant.SCHEME_NOTFOUND_MESSAGE);
 		}
-		Float taxBenefit = scheme.get().getTaxBenefit();
-		Double taxBenefitAmount = Utility.calculateCharges(scheme.get().getSchemeAmount(), taxBenefit);
+		Double taxBenefitAmount = Utility.calculateCharges(scheme.get().getSchemeAmount(), scheme.get().getTaxBenefit());
 		schemeDetailsResponseDto.setTaxBenefitAmount(taxBenefitAmount);
 		BeanUtils.copyProperties(scheme.get(), schemeDetailsResponseDto);
 		return schemeDetailsResponseDto;

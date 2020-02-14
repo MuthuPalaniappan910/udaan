@@ -108,4 +108,12 @@ public class GlobalExceptionHandler {
 		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
 	}
+	
+	@ExceptionHandler(SchemeListEmptyException.class)
+	public ResponseEntity<ErrorDto> schemeListEmptyException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.SCHEMELIST_EMPTY_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
+	}
 }
