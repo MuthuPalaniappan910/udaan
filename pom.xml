@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<sonar.coverage.exclusions>**udaan/*,**/config/*,**/entity/*,**/payment/*,**/dto/*,**/repository/*,**/util/*,**/exception/*,**/impl/*</sonar.coverage.exclusions>
+		<sonar.coverage.exclusions>**udaan/*,**/config/*,**/entity/*,**/payment/*,**/dto/*,**/repository/*,**/util/*,**/exception/*,**/impl/*,**/helper/*</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>

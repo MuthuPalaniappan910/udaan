@@ -2,6 +2,7 @@ package com.spiralforge.udaan.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -73,11 +74,11 @@ public class UserController {
 	 */
 	@GetMapping(value = "{userId}/download", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> downloadPDF(@PathVariable("userId") Long userId)
-			throws IOException, UserNotFoundException, DonationNotFoundException {
+			throws UserNotFoundException, DonationNotFoundException, IOException {
 
 		byte[] byteData = userService.download(userId);
 
-		if (byteData.length > 0) {
+		if (Objects.isNull(byteData) || byteData.length > 0) {
 			return ResponseEntity.badRequest().build();
 		} else {
 			logger.info("inside download pdf method");
@@ -102,11 +103,11 @@ public class UserController {
 	 */
 	@GetMapping(value = "{userId}/email", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> sendPDFInMail(@PathVariable("userId") Long userId)
-			throws IOException, UserNotFoundException, DonationNotFoundException {
+			throws UserNotFoundException, DonationNotFoundException, IOException {
 
 		byte[] byteData = userService.sendPDFInMail(userId);
 
-		if (byteData.length > 0) {
+		if (Objects.isNull(byteData) || byteData.length > 0) {
 			return ResponseEntity.badRequest().build();
 		} else {
 			logger.info("inside download pdf and send PDF in Mail");
