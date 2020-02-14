@@ -22,7 +22,7 @@ public class ApiConstant {
 	public static final String INTERNAL_SERVER_ERROR = "INTERNAL SERVER ERROR";
 	public static final String VALIDATION_FAILED = "VALIDATION FAILED";
 	public static final String NO_ELEMENT_FOUND = "NO ELEMENT FOUND";
-	public static final String CUSTOMER_NOT_FOUND = "Not a valid customer";
+	public static final String USER_NOT_FOUND = "Not a valid user";
 
 	public static final Integer SUCCESS_CODE = 200;
 	public static final Integer FAILURE_CODE = 404;
@@ -33,5 +33,9 @@ public class ApiConstant {
 	public static final String EMPTY_CUSTOMERINPUT_MESSAGE = "Password can't be left blank";
 	public static final String INVALID_MOBILENUMBER_MESSAGE = "Please enter a valid mobile number";
 	public static final String PAYMENT_SUCCESS = "Payment is success";
+	public static final String DONATION_NOTFOUND_MESSAGE = "There is no such donation found";
+
+	public static final String MAIL_SUBJECT = "Thank you for your donation";
+	
 
 }

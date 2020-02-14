@@ -1,5 +1,6 @@
 package com.spiralforge.udaan.service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -14,11 +15,18 @@ import com.spiralforge.udaan.constants.ApiConstant;
 import com.spiralforge.udaan.constants.ApplicationConstants;
 import com.spiralforge.udaan.dto.PaymentRequestDto;
 import com.spiralforge.udaan.dto.PaymentResponseDto;
+import com.spiralforge.udaan.entity.Donation;
 import com.spiralforge.udaan.entity.Scheme;
 import com.spiralforge.udaan.entity.User;
+import com.spiralforge.udaan.exception.DonationNotFoundException;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
+import com.spiralforge.udaan.exception.UserNotFoundException;
+import com.spiralforge.udaan.helper.GeneratePdfReport;
+import com.spiralforge.udaan.helper.MailService;
+import com.spiralforge.udaan.repository.DonationRepository;
 import com.spiralforge.udaan.repository.SchemeRepository;
 import com.spiralforge.udaan.repository.UserRepository;
+import com.spiralforge.udaan.util.Utility;
 
 /**
  * @author Sri Keerthna.
@@ -38,6 +46,15 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private DonationRepository donationRepository;
+
+	@Autowired
+	private GeneratePdfReport generatePdfReport;
+
+	@Autowired
+	private MailService mailService;
 
 	@Override
 	public Optional<User> getUser(Long userId) {
@@ -69,5 +86,66 @@ public class UserServiceImpl implements UserService {
 		paymentResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);
 		logger.info("Payment Success");
 		return paymentResponseDto;
+	}
+
+	/**
+	 * @author Sujal.
+	 * @since 2020-02-14. In this method user will download the donation detail
+	 *        after payment.
+	 * @param userId is user Id after saving donation detail.
+	 * @return byte[] for download pdf.
+	 * @throws UserNotFoundException if no user found.
+	 * @throws DonationNotFoundException 
+	 */
+	@Override
+	public byte[] download(Long userId) throws UserNotFoundException, DonationNotFoundException {
+		Optional<User> user = getUser(userId);
+		if (!user.isPresent()) {
+			throw new UserNotFoundException(ApiConstant.USER_NOT_FOUND);
+		} else {
+			logger.info("generate pdf file");
+			Donation donation = donationRepository.findByUser(user.get());
+			if (Objects.isNull(donation)) {
+				throw new DonationNotFoundException(ApiConstant.DONATION_NOTFOUND_MESSAGE);
+
+			} else {
+				return generatePdfReport.generatePdf(user.get(), donation);
+			}
+		}
+	}
+
+	/**
+	 * @author Sujal.
+	 * @since 2020-02-14. In this method user will download the donation detail
+	 *        after payment and send send the mail with pdf attachment.
+	 * @param userId is user Id after saving donation detail.
+	 * @return byte[] for download pdf.
+	 * @throws UserNotFoundException     if no user found.
+	 * @throws DonationNotFoundException
+	 */
+	@Override
+	public byte[] sendPDFInMail(Long userId) throws UserNotFoundException, DonationNotFoundException {
+
+		Optional<User> user = getUser(userId);
+		if (!user.isPresent()) {
+			throw new UserNotFoundException(ApiConstant.USER_NOT_FOUND);
+		} else {
+			logger.info("generating the pdf file in mail");
+
+			Donation donation = donationRepository.findByUser(user.get());
+			if (Objects.isNull(donation)) {
+				throw new DonationNotFoundException(ApiConstant.DONATION_NOTFOUND_MESSAGE);
+
+			} else {
+				byte[] byteData = generatePdfReport.generatePdf(user.get(), donation);
+				if (!Objects.isNull(byteData) && byteData.length > 0) {
+					logger.info("sending the pdf file in mail");
+					mailService.sendMail(user.get().getEmailId(), ApiConstant.MAIL_SUBJECT,
+							Utility.getContent(user.get().getUserName(), donation.getScheme().getSchemeAmount()),
+							byteData);
+				}
+				return byteData;
+			}
+		}
 	}
 }

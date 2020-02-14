@@ -19,5 +19,14 @@ public class Utility {
 		Double taxBenefitAmount = (amount * (percentage / ApiConstant.PERCENTAGE_DIVIDE_VALUE));
 		return (Math.round(taxBenefitAmount * 100.0) / 100.0);
 	}
+	
+	public static String getContent(String name, Double amount) {
+		StringBuilder text = new StringBuilder("Dear "+name+", \n \n We have received your donation amount INR: "+amount);
+		text.append("\n \n THANK YOU FOR YOUR DONATION THROUGH.");
+		text.append("\n \n \n NOTE: Please don't reply to this mail.");
+		text.append("\n \n Sincerely, \n Udaan Team");
+
+		return text.toString();
+	}
 
 }
