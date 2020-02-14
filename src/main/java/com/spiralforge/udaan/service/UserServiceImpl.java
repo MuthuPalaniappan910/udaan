@@ -22,6 +22,7 @@ import com.spiralforge.udaan.repository.UserRepository;
 
 /**
  * @author Sri Keerthna.
+ * @author Sujal
  * @since 2020-02-14.
  */
 @Service
@@ -33,10 +34,15 @@ public class UserServiceImpl implements UserService {
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
-	UserRepository userRepository;
+	private SchemeRepository schemeRepository;
 
 	@Autowired
-	SchemeRepository schemeRepository;
+	private UserRepository userRepository;
+
+	@Override
+	public Optional<User> getUser(Long userId) {
+		return userRepository.findById(userId);
+	}
 
 	/**
 	 * @author Sri Keerthna.
