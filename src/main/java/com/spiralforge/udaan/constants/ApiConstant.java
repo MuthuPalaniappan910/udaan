@@ -6,13 +6,15 @@ package com.spiralforge.udaan.constants;
  *
  */
 public class ApiConstant {
-	
+
 	private ApiConstant() {
 	}
 
-	public static final String LOGIN_ERROR = "please enter valid username and password";
-	public static final String LOGIN_SUCCESS = "you are successfully logged in";
-	public static final String CREDIT_CARD_TYPE = "credit";
+	public static final String ADMIN_NOTFOUND_MESSAGE = "Invalid credentials. Please enter valid username and password";
+	public static final String LOGIN_SUCCESS = "You are successfully logged in";
+
+	public static final String SCHEMELIST_EMPTY_MESSAGE = "There are currently no statistics found";
+	public static final String SCHEMELIST_MESSAGE = "The statistics for the schemes are displayed";
 
 	public static final String SUCCESS = "Operation successful";
 	public static final String FAILED = "Operation faild";
@@ -26,15 +28,10 @@ public class ApiConstant {
 	public static final Integer FAILURE_CODE = 404;
 	public static final Integer NO_CONTENT_CODE = 204;
 
-	public static final String INVALID_SLOT_DETAIL = "Availablity data is not provided correcty.";
-	public static final String INVALID_SLOT_FROMDATE = "Available from date should be after current date.";
-	public static final String INVALID_SLOT_TODATE = "Available to date should be after current date.";
-
-	public static final String INVALID_PAYMENT_TYPE = "Payment type is not provided.";
-
-	public static final String DOCTOR_NOT_FOUND = "Doctor not found";
-	public static final String DOCTOR_NOT_AVAILABLE = "Doctor slot not available";
-
-	public static final String INVALID_SLOT_TIME = "Available from time should be less than to time";
+	public static final Float PERCENTAGE_DIVIDE_VALUE = 100.0f;
+	public static final String SCHEME_NOTFOUND_MESSAGE = "There is no such scheme found";
+	public static final String EMPTY_CUSTOMERINPUT_MESSAGE = "Password can't be left blank";
+	public static final String INVALID_MOBILENUMBER_MESSAGE = "Please enter a valid mobile number";
+	public static final String PAYMENT_SUCCESS = "Payment is success";
 
 }

@@ -1,6 +1,6 @@
 package com.spiralforge.udaan.helper;
 
-import com.spiralforge.udaan.config.exception.ValidationFailedException;
+import com.spiralforge.udaan.exception.ValidationFailedException;
 
 public interface OrderValidator<T> {
 	

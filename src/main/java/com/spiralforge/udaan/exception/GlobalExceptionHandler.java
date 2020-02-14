@@ -1,8 +1,9 @@
-package com.spiralforge.udaan.config.exception;
+package com.spiralforge.udaan.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.spiralforge.udaan.constants.ApiConstant;
+import com.spiralforge.udaan.dto.ErrorDto;
 import com.spiralforge.udaan.dto.ExceptionResponseDto;
 
 @ControllerAdvice
@@ -89,5 +91,21 @@ public class GlobalExceptionHandler {
 	public final ExceptionResponseDto handleValidationFailedException(ValidationFailedException exception) {
 		String defaultMessage = exception.getMessage();
 		return new ExceptionResponseDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
+	}
+	
+	@ExceptionHandler(SchemeNotFoundException.class)
+	public ResponseEntity<ErrorDto> schemeNotFoundException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.SCHEME_NOTFOUND_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
+	}
+	
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<ErrorDto> adminNotFoundException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.ADMIN_NOTFOUND_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
 	}
 }

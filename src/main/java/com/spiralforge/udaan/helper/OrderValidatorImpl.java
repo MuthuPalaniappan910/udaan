@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.spiralforge.udaan.config.exception.ValidationFailedException;
+import com.spiralforge.udaan.exception.ValidationFailedException;
 
 /**
  * 

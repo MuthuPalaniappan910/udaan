@@ -14,4 +14,5 @@ public class ApplicationConstants {
 	public static final String SUCCESS_STATUS = "SUCCESS";
 	public static final String FAILED_STATUS = "FAILED";
 	public static final String PENDING_STATUS = "PENDING";
+	public static final String SCHEME_NOT_FOUND_EXCEPTION = "No scheme available";
 }
