@@ -53,10 +53,11 @@ public class UserController {
 	 * @param paymentRequestDto has username,pan number,emailId and mobile number.
 	 * @return success message is sent to user.
 	 * @throws SchemeNotFoundException if no scheme found.
+	 * @throws UserNotFoundException 
 	 */
 	@PostMapping
 	public ResponseEntity<PaymentResponseDto> charitablePayment(@Valid @RequestBody PaymentRequestDto paymentRequestDto)
-			throws SchemeNotFoundException {
+			throws SchemeNotFoundException, UserNotFoundException {
 		logger.info("Entered into charitablePayment method in user controller");
 		PaymentResponseDto paymentResponseDto = userService.charitablePayment(paymentRequestDto);
 		return new ResponseEntity<>(paymentResponseDto, HttpStatus.OK);

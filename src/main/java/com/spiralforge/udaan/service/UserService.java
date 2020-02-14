@@ -20,7 +20,7 @@ public interface UserService {
 
 	Optional<User> getUser(Long userId);
 	
-	PaymentResponseDto charitablePayment(@Valid PaymentRequestDto paymentRequestDto) throws SchemeNotFoundException;
+	PaymentResponseDto charitablePayment(@Valid PaymentRequestDto paymentRequestDto) throws SchemeNotFoundException, UserNotFoundException;
 
 	byte[] download(Long userId) throws UserNotFoundException, DonationNotFoundException;
 
