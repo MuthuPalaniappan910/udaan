@@ -21,8 +21,4 @@ INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, 
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('2', 'One in four kids in the India faces hunger.', '5000', 'Hunger Solution', 'ACTIVE', '8');
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('3', 'Help the rural people to get an education', '10000', 'Rural voices ', 'ACTIVE', '10');
 
-<<<<<<< HEAD
 insert into ADMIN (ADMIN_ID,ADMIN_NAME,MOBILE_NUMBER,PASSWORD) values (51820777,'Muthu',9876543210,'muthu123');
-=======
-INSERT INTO user (`user_id`, `email_id`, `mobile_number`, `pan_number`, `user_name`, `user_status`) VALUES ('1', 'sujalshaikhsk@gmail.com', '9916818770', 'GJ880I80', 'sujal', 'ACTIVE');
->>>>>>> f149a9cb15b7bef5166000151873c3860f0bfed9
