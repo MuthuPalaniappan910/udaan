@@ -68,10 +68,12 @@ public class UserServiceImpl implements UserService {
 	 * @param paymentRequestDto has username,pan number,emailId and mobile number.
 	 * @return success message is sent to user.
 	 * @throws SchemeNotFoundException if no scheme found.
+	 * @throws UserNotFoundException 
 	 */
 	@Override
 	public PaymentResponseDto charitablePayment(@Valid PaymentRequestDto paymentRequestDto)
-			throws SchemeNotFoundException {
+			throws SchemeNotFoundException, UserNotFoundException {
+		User user1=null;
 		Optional<Scheme> scheme = schemeRepository.findById(paymentRequestDto.getSchemeId());
 		if (!scheme.isPresent()) {
 			logger.error("No scheme found");
@@ -81,7 +83,11 @@ public class UserServiceImpl implements UserService {
 		PaymentResponseDto paymentResponseDto = new PaymentResponseDto();
 		BeanUtils.copyProperties(paymentRequestDto, user);
 		user.setUserStatus(ApplicationConstants.ACTIVE_STATUS);
-		userRepository.save(user);
+		user1=userRepository.save(user);
+		if(Objects.isNull(user1)) {
+			throw new UserNotFoundException(ApiConstant.USER_NOT_FOUND);
+		}
+		saveDonationData(user1, scheme.get());
 		BeanUtils.copyProperties(paymentRequestDto, paymentResponseDto);
 		BeanUtils.copyProperties(scheme.get(), paymentResponseDto);
 		paymentResponseDto.setUserId(user.getUserId());
@@ -91,6 +97,14 @@ public class UserServiceImpl implements UserService {
 		paymentResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);
 		logger.info("Payment Success");
 		return paymentResponseDto;
+	}
+
+	private void saveDonationData(User user1, Scheme scheme) {
+		Donation donation= new Donation();
+		donation.setPaymentStatus(ApplicationConstants.SUCCESS_STATUS);
+		donation.setScheme(scheme);
+		donation.setUser(user1);
+		donationRepository.save(donation);
 	}
 
 	/**
