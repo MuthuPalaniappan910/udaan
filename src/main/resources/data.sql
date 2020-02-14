@@ -17,9 +17,8 @@ create table user (user_id bigint not null auto_increment, email_id varchar(255)
 alter table donation add constraint FK8ohjtufma9ixlbckv02wj4hrx foreign key (scheme_id) references scheme (scheme_id);
 alter table donation add constraint FK2rx4oikd7rs8ddja8k9xc25my foreign key (user_id) references user (user_id);
 
-INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('1', 'A man who lives everywhere lives nowhere.', '1000', 'Homeless Children', 'ACTIVE', '5');
+INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('1', 'The Intent here is to end homelessness.', '1000', 'Homeless Children','ACTIVE', '5');
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('2', 'One in four kids in India faces hunger.', '5000', 'Hunger Solution', 'ACTIVE', '8');
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('3', 'Help the rural people to get an education', '10000', 'Rural voices ', 'ACTIVE', '10');
 INSERT INTO user (`user_id`, `email_id`, `mobile_number`, `pan_number`, `user_name`, `user_status`) VALUES ('1', 'sujalshaikhsk@gmail.com', '9916818770', 'GJ880I80', 'sujal', 'ACTIVE');
 
-insert into ADMIN (ADMIN_ID,ADMIN_NAME,MOBILE_NUMBER,PASSWORD) values (51820777,'Muthu',9876543210,'muthu123');

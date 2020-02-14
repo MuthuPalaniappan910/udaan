@@ -3,6 +3,7 @@ package com.spiralforge.udaan.service;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
 	 * @throws SchemeNotFoundException if no scheme found.
 	 * @throws UserNotFoundException 
 	 */
-	@Override
+	@Transactional
 	public PaymentResponseDto charitablePayment(@Valid PaymentRequestDto paymentRequestDto)
 			throws SchemeNotFoundException, UserNotFoundException {
 		User user1=null;
@@ -84,9 +85,6 @@ public class UserServiceImpl implements UserService {
 		BeanUtils.copyProperties(paymentRequestDto, user);
 		user.setUserStatus(ApplicationConstants.ACTIVE_STATUS);
 		user1=userRepository.save(user);
-		if(Objects.isNull(user1)) {
-			throw new UserNotFoundException(ApiConstant.USER_NOT_FOUND);
-		}
 		saveDonationData(user1, scheme.get());
 		BeanUtils.copyProperties(paymentRequestDto, paymentResponseDto);
 		BeanUtils.copyProperties(scheme.get(), paymentResponseDto);
@@ -99,7 +97,7 @@ public class UserServiceImpl implements UserService {
 		return paymentResponseDto;
 	}
 
-	private void saveDonationData(User user1, Scheme scheme) {
+	public void saveDonationData(User user1, Scheme scheme) {
 		Donation donation= new Donation();
 		donation.setPaymentStatus(ApplicationConstants.SUCCESS_STATUS);
 		donation.setScheme(scheme);
