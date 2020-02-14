@@ -15,8 +15,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.BeanUtils;
 
 import com.spiralforge.udaan.constants.ApplicationConstants;
-import com.spiralforge.udaan.controller.SchemeController;
-import com.spiralforge.udaan.controller.UserController;
 import com.spiralforge.udaan.dto.SchemeResponseDto;
 import com.spiralforge.udaan.entity.Scheme;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
@@ -31,11 +29,11 @@ public class SchemeServiceTest {
 	@Mock
 	SchemeRepository schemeRepository;
 
-	List<SchemeResponseDto> resultList=new ArrayList<>();
-	List<Scheme> schemeList=new ArrayList<>();
-	Scheme scheme= new Scheme();
+	List<SchemeResponseDto> resultList = new ArrayList<>();
+	List<Scheme> schemeList = new ArrayList<>();
+	Scheme scheme = new Scheme();
 	SchemeResponseDto schemeResponse = new SchemeResponseDto();
-	
+
 	@Before
 	public void setUp() {
 		scheme.setSchemeId(1L);
@@ -44,14 +42,14 @@ public class SchemeServiceTest {
 		BeanUtils.copyProperties(scheme, schemeResponse);
 		resultList.add(schemeResponse);
 	}
-	
+
 	@Test
 	public void testGetSchemeList() throws SchemeNotFoundException {
 		Mockito.when(schemeRepository.findBySchemeStatus(ApplicationConstants.ACTIVE_STATUS)).thenReturn(schemeList);
-		List<SchemeResponseDto> result=schemeService.getSchemeList();
+		List<SchemeResponseDto> result = schemeService.getSchemeList();
 		assertEquals(1, result.size());
 	}
-	
+
 	@Test(expected = SchemeNotFoundException.class)
 	public void testGetSchemeListNegative() throws SchemeNotFoundException {
 		Mockito.when(schemeRepository.findBySchemeStatus("INACTIVE")).thenReturn(schemeList);

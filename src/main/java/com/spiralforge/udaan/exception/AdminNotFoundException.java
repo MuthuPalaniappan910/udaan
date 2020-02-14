@@ -1,6 +1,6 @@
 package com.spiralforge.udaan.exception;
 
-public class SchemeNotFoundException extends Exception {
+public class AdminNotFoundException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,7 +10,7 @@ public class SchemeNotFoundException extends Exception {
 	 * 
 	 * @param message if doctor not found the message will be thrown.
 	 */
-	public SchemeNotFoundException(String message) {
+	public AdminNotFoundException(String message) {
 		super(message);
 	}
 
