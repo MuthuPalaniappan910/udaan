@@ -85,10 +85,10 @@ public class GlobalExceptionHandler {
 	 * @param exception
 	 * @return ExceptionResponseDto
 	 */
-	@ExceptionHandler(ValidationFailedException.class)
+	@ExceptionHandler(UserNotFoundException.class)
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public final ExceptionResponseDto handleValidationFailedException(ValidationFailedException exception) {
+	public final ExceptionResponseDto handleValidationFailedException(UserNotFoundException exception) {
 		String defaultMessage = exception.getMessage();
 		return new ExceptionResponseDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
 	}

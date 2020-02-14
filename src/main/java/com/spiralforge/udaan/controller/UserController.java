@@ -2,7 +2,6 @@ package com.spiralforge.udaan.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -24,10 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spiralforge.udaan.dto.PaymentRequestDto;
 import com.spiralforge.udaan.dto.PaymentResponseDto;
-import com.spiralforge.udaan.entity.User;
+import com.spiralforge.udaan.exception.DonationNotFoundException;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
-import com.spiralforge.udaan.helper.GeneratePdfReport;
-import com.spiralforge.udaan.helper.MailService;
+import com.spiralforge.udaan.exception.UserNotFoundException;
 import com.spiralforge.udaan.service.UserService;
 
 /**
@@ -47,12 +45,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private GeneratePdfReport generatePdfReport;
-
-	@Autowired
-	private MailService mailService;
-
 	/**
 	 * @author Sri Keerthna.
 	 * @since 2020-02-14. In this method user will give their details to make a
@@ -69,17 +61,27 @@ public class UserController {
 		return new ResponseEntity<>(paymentResponseDto, HttpStatus.OK);
 	}
 
+	/**
+	 * @author Sujal.
+	 * @since 2020-02-14. In this method user will download the donation detail
+	 *        after payment.
+	 * @param userId
+	 * @return InputStreamResource to download pdf file
+	 * @throws IOException
+	 * @throws UserNotFoundException
+	 * @throws DonationNotFoundException 
+	 */
 	@GetMapping(value = "{userId}/download", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> download(@PathVariable("userId") Long userId) throws IOException {
+	public ResponseEntity<InputStreamResource> downloadPDF(@PathVariable("userId") Long userId)
+			throws IOException, UserNotFoundException, DonationNotFoundException {
 
-		Optional<User> user = userService.getUser(userId);
+		byte[] byteData = userService.download(userId);
 
-		if (!user.isPresent()) {
+		if (byteData.length > 0) {
 			return ResponseEntity.badRequest().build();
 		} else {
-
-			byte[] b = generatePdfReport.generatePdf(user.get());
-			ByteArrayInputStream bis = new ByteArrayInputStream(b);
+			logger.info("inside download pdf method");
+			ByteArrayInputStream bis = new ByteArrayInputStream(byteData);
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
 
@@ -88,18 +90,27 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * @author Sujal.
+	 * @since 2020-02-14. In this method user will download the donation detail
+	 *        after payment and send send the mail with pdf attachment.
+	 * @param userId
+	 * @return InputStreamResource to download pdf file
+	 * @throws IOException
+	 * @throws UserNotFoundException
+	 * @throws DonationNotFoundException 
+	 */
 	@GetMapping(value = "{userId}/email", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> email(@PathVariable("userId") Long userId) throws IOException {
+	public ResponseEntity<InputStreamResource> sendPDFInMail(@PathVariable("userId") Long userId)
+			throws IOException, UserNotFoundException, DonationNotFoundException {
 
-		Optional<User> user = userService.getUser(userId);
+		byte[] byteData = userService.sendPDFInMail(userId);
 
-		if (!user.isPresent()) {
+		if (byteData.length > 0) {
 			return ResponseEntity.badRequest().build();
 		} else {
-			byte[] b = generatePdfReport.generatePdf(user.get());
-			ByteArrayInputStream bis = new ByteArrayInputStream(b);
-
-			mailService.sendMail("sujalshaikhsk@gmail.com", "Test", "Kuch", b);
+			logger.info("inside download pdf and send PDF in Mail");
+			ByteArrayInputStream bis = new ByteArrayInputStream(byteData);
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Content-Disposition", "inline; filename=udaan.pdf");
 

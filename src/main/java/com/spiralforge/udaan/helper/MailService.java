@@ -1,8 +1,8 @@
 package com.spiralforge.udaan.helper;
 
 /**
- * @author Sujal.
- * @since 2020-02-07.
+ * @author Sujal
+ * @since 2020-02-14.
  */
 public interface MailService {
 	
