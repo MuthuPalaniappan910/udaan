@@ -65,12 +65,12 @@ public class UserServiceTest {
 		paymentResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);
 	}
 	
-//	@Test
-//	public void testCharitablePaymentPositive() throws SchemeNotFoundException, UserNotFoundException {
-//		Mockito.when(schemeRepository.findById(paymentRequestDto.getSchemeId())).thenReturn(Optional.of(scheme));
-//		PaymentResponseDto result=userService.charitablePayment(paymentRequestDto);
-//		assertEquals(200, result.getStatusCode());
-//	}
+	@Test
+	public void testCharitablePaymentPositive() throws SchemeNotFoundException, UserNotFoundException {
+		Mockito.when(schemeRepository.findById(paymentRequestDto.getSchemeId())).thenReturn(Optional.of(scheme));
+		PaymentResponseDto result=userService.charitablePayment(paymentRequestDto);
+		assertEquals(200, result.getStatusCode());
+	}
 	
 	@Test(expected = SchemeNotFoundException.class)
 	public void testCharitablePaymentNegative() throws SchemeNotFoundException, UserNotFoundException {

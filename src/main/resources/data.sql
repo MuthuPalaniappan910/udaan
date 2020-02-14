@@ -22,3 +22,4 @@ INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, 
 INSERT INTO scheme (`scheme_id`, `description`, `scheme_amount`, `scheme_name`, `scheme_status`, `tax_benefit`) VALUES ('3', 'Help the rural people to get an education', '10000', 'Rural voices ', 'ACTIVE', '10');
 INSERT INTO user (`user_id`, `email_id`, `mobile_number`, `pan_number`, `user_name`, `user_status`) VALUES ('1', 'sujalshaikhsk@gmail.com', '9916818770', 'GJ880I80', 'sujal', 'ACTIVE');
 
+Insert into admin(`admin_id`,`admin_name`,`mobile_number`,`password`) VALUES('51820777','Muthu','9876543210','muthu123');

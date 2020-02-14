@@ -2,6 +2,7 @@ package com.spiralforge.udaan.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 
@@ -49,7 +50,7 @@ public class UserControllerTest {
 
 		Mockito.when(userService.download(userId)).thenReturn(expectedRead);
 		InputStreamResource result = userController.downloadPDF(userId).getBody();
-		assertNull(result);
+		assertNotNull(result);
 	}
 
 	@Test
@@ -70,7 +71,7 @@ public class UserControllerTest {
 
 		Mockito.when(userService.sendPDFInMail(userId)).thenReturn(expectedRead);
 		InputStreamResource result = userController.sendPDFInMail(userId).getBody();
-		assertNull(result);
+		assertNotNull(result);
 
 	}
 
