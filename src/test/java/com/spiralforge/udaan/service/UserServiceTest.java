@@ -22,7 +22,6 @@ import com.spiralforge.udaan.entity.User;
 import com.spiralforge.udaan.exception.SchemeNotFoundException;
 import com.spiralforge.udaan.repository.SchemeRepository;
 import com.spiralforge.udaan.repository.UserRepository;
-import com.spiralforge.udaan.util.Utility;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class UserServiceTest {
