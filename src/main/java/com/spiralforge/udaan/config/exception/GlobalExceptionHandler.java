@@ -100,4 +100,12 @@ public class GlobalExceptionHandler {
 		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
 	}
+	
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<ErrorDto> adminNotFoundException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.ADMIN_NOTFOUND_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
+	}
 }

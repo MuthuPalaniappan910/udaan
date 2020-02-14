@@ -21,6 +21,16 @@ public class SchemeServiceImpl implements SchemeService {
 	@Autowired
 	SchemeRepository schemeRepository;
 
+	/**
+	 * @author Muthu
+	 * 
+	 *         Method is used to get the details of the particular scheme
+	 * 
+	 * @param schemeId Value for identifying a particular scheme
+	 * @return SchemeDetailsResponseDto which has the scheme details that includes
+	 *         name,description,tax amount,tax benefit
+	 * @throws SchemeNotFoundException is called when the scheme is not found
+	 */
 	@Override
 	public SchemeDetailsResponseDto getSchemeDetails(Long schemeId) throws SchemeNotFoundException {
 		SchemeDetailsResponseDto schemeDetailsResponseDto = new SchemeDetailsResponseDto();
@@ -30,7 +40,7 @@ public class SchemeServiceImpl implements SchemeService {
 			throw new SchemeNotFoundException(ApiConstant.SCHEME_NOTFOUND_MESSAGE);
 		}
 		Float taxBenefit = scheme.get().getTaxBenefit();
-		Double taxBenefitAmount= Utility.calculateCharges(scheme.get().getSchemeAmount(),taxBenefit);
+		Double taxBenefitAmount = Utility.calculateCharges(scheme.get().getSchemeAmount(), taxBenefit);
 		schemeDetailsResponseDto.setTaxBenefitAmount(taxBenefitAmount);
 		BeanUtils.copyProperties(scheme.get(), schemeDetailsResponseDto);
 		return schemeDetailsResponseDto;

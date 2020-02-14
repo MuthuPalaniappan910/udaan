@@ -23,6 +23,16 @@ public class SchemeController {
 	@Autowired
 	SchemeService schemeService;
 
+	/**
+	 * @author Muthu
+	 * 
+	 *         Method is used to get the details of the particular scheme
+	 * 
+	 * @param schemeId Value for identifying a particular scheme
+	 * @return SchemeDetailsResponseDto which has the scheme details that includes
+	 *         name,description,tax amount,tax benefit
+	 * @throws SchemeNotFoundException is called when the scheme is not found
+	 */
 	@GetMapping("/{schemeId}")
 	public ResponseEntity<SchemeDetailsResponseDto> getSchemeDetails(@PathVariable(name = "schemeId") Long schemeId)
 			throws SchemeNotFoundException {
