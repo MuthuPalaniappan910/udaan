@@ -36,5 +36,6 @@ public class ApiConstant {
 	public static final String DOCTOR_NOT_AVAILABLE = "Doctor slot not available";
 
 	public static final String INVALID_SLOT_TIME = "Available from time should be less than to time";
+	public static final String PAYMENT_SUCCESS = "Your payment is success";
 
 }
